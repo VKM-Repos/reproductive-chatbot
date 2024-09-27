@@ -23,7 +23,7 @@ export default function ChatCard({
     "What are the major health or medical news updates for this week?",
   ]);
   // clearChats();
-  const chatref = useRef<any>(null);
+  const chatref = useRef<HTMLDivElement>(null);
   const myFormRef = useRef<HTMLFormElement>(null);
   const {
     messages,
@@ -54,8 +54,7 @@ export default function ChatCard({
     }
     chatref.current?.lastElementChild?.scrollIntoView();
   }, [messages]);
-  const handleStartChat = async (e: any, question: any) => {
-    e.preventDefault();
+  const handleStartChat = async (question: string) => {
     setInput(question);
     setTimeout(() => {
       myFormRef.current?.requestSubmit();
@@ -65,15 +64,15 @@ export default function ChatCard({
     handleShowChat();
   };
 
-  const copyTopClipBoard = (text: any, elementId: any) => {
+  const copyTopClipBoard = (text: string, elementId: string) => {
     navigator.clipboard.writeText(text);
     document.getElementById(elementId)?.showPopover;
   };
-  const editUserInput = (text: any) => {
+  const editUserInput = (text: string) => {
     setInput(text);
   };
-  const onEnterPress = (e: any) => {
-    if ((e.keyCode == 13 || e.key == "Enter") && e.shiftKey == false) {
+  const onEnterPress = (e: React.KeyboardEvent) => {
+    if (e.key == "Enter" && e.shiftKey == false) {
       e.preventDefault();
       handleSubmit();
     }
@@ -117,12 +116,13 @@ export default function ChatCard({
           <div className="text-[10px] flex justify-center gap-1 flex-wrap">
             {initialQuestions?.map((question) => (
               <button
-                onClick={(e) => {
-                  handleStartChat(e, question);
+                onClick={() => {
+                  handleStartChat(question);
                 }}
                 data-target={question}
                 className="flex items-center gap-2 border w-fit rounded-lg px-3 py-1 cursor-pointer hover:bg-slate-100"
                 key={question}
+                type="button"
               >
                 <SparkIcon />
                 {question}
@@ -135,7 +135,7 @@ export default function ChatCard({
           ref={chatref}
           className="flex flex-col object-bottom gap-5 text-sm px-2  h-[80%] max-h-[80%] overflow-y-scroll no-scrollbar rounded-lg"
         >
-          {messages?.map((message: any, index: any) => (
+          {messages?.map((message: any) => (
             <div key={message.id}>
               <div className="flex gap-2">
                 {message.role == "user" ? (
