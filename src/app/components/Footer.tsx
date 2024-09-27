@@ -13,9 +13,6 @@ export default function Footer() {
         <h2 className="font-semibold text-xl font-montserrat text-white">
           VHDO
         </h2>
-        {/* <a href="#" className="text-white text-sm mx-5 hover:underline">
-          Privacy & Terms
-        </a> */}
       </div>
     </div>
   );

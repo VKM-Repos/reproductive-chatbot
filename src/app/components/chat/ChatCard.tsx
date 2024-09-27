@@ -2,12 +2,10 @@
 import { motion } from "framer-motion";
 import SparkIcon from "./SparkIcon";
 import { useEffect, useRef, useState } from "react";
-import useChatStream, {
-  UseChatStreamChatMessage,
-} from "@magicul/react-chat-stream";
+import useChatStream from "@magicul/react-chat-stream";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import useChatStore from "@/app/store/chat.store";
+// import useChatStore from "@/app/store/chat.store";
 import { Button } from "../ui/button";
 
 export default function ChatCard({
@@ -15,12 +13,9 @@ export default function ChatCard({
 }: {
   handleShowChat: () => void;
 }) {
-  const { storeChat, chats, clearChats } = useChatStore();
+  // const { storeChat, chats, clearChats } = useChatStore();
   const [startChat, setStartChat] = useState(false);
-  const [userInput, setUserInput] = useState("");
-  const [chatHistory, setChatHistory] = useState<any[]>([]);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+
   const [initialQuestions] = useState([
     "Write me a post about child abuse",
     "Show me quick and easy lunch recipes",
@@ -47,7 +42,7 @@ export default function ChatCard({
       key: "prompt",
     },
     handlers: {
-      onMessageAdded: function (message: UseChatStreamChatMessage) {
+      onMessageAdded: function () {
         console.log("");
       },
     },
@@ -65,8 +60,6 @@ export default function ChatCard({
     setTimeout(() => {
       myFormRef.current?.requestSubmit();
     });
-
-    // handleSubmit();
   };
   const handleSetShowChat = () => {
     handleShowChat();

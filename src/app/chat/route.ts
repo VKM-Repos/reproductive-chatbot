@@ -6,7 +6,6 @@ export async function GET(request: Request) {
   const question = {
     question: prompt,
   };
-  // Make an external POST request
   const apiResponse = await fetch(
     "https://api.dev.vhdo.org/api/ai/health-query",
     {
@@ -18,7 +17,6 @@ export async function GET(request: Request) {
     }
   );
 
-  // Check if the POST request was successful
   if (!apiResponse.ok) {
     return NextResponse.json(
       { error: "Failed to fetch data from the external API" },
@@ -27,15 +25,12 @@ export async function GET(request: Request) {
   }
 
   const apiData = await apiResponse.json();
-  console.log(apiData.answer, "//////////");
-
-  // You can use apiData here if needed
 
   const response = new NextResponse(
     new ReadableStream({
       async start(controller) {
         let index = 0;
-        const textToStream = `${JSON.stringify(apiData.answer)}`; // Combining your response text and API data
+        const textToStream = `${JSON.stringify(apiData.answer)}`;
 
         const timer = setInterval(() => {
           if (index < textToStream.length) {
