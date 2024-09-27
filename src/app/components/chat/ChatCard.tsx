@@ -2,7 +2,9 @@
 import { motion } from "framer-motion";
 import SparkIcon from "./SparkIcon";
 import { useEffect, useRef, useState } from "react";
-import useChatStream from "@magicul/react-chat-stream";
+import useChatStream, {
+  UseChatStreamChatMessage,
+} from "@magicul/react-chat-stream";
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 // import useChatStore from "@/app/store/chat.store";
@@ -64,9 +66,8 @@ export default function ChatCard({
     handleShowChat();
   };
 
-  const copyTopClipBoard = (text: string, elementId: string) => {
+  const copyTopClipBoard = (text: string) => {
     navigator.clipboard.writeText(text);
-    document.getElementById(elementId)?.showPopover;
   };
   const editUserInput = (text: string) => {
     setInput(text);
@@ -135,7 +136,7 @@ export default function ChatCard({
           ref={chatref}
           className="flex flex-col object-bottom gap-5 text-sm px-2  h-[80%] max-h-[80%] overflow-y-scroll no-scrollbar rounded-lg"
         >
-          {messages?.map((message: any) => (
+          {messages?.map((message: UseChatStreamChatMessage) => (
             <div key={message.id}>
               <div className="flex gap-2">
                 {message.role == "user" ? (
@@ -314,7 +315,7 @@ export default function ChatCard({
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                                 onClick={() =>
-                                  copyTopClipBoard(message.content, message.id)
+                                  copyTopClipBoard(message.content)
                                 }
                                 id={message.id}
                               >
@@ -350,9 +351,7 @@ export default function ChatCard({
                               viewBox="0 0 24 24"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
-                              onClick={() =>
-                                copyTopClipBoard(message.content, message.id)
-                              }
+                              onClick={() => copyTopClipBoard(message.content)}
                               id={message.id}
                             >
                               <path

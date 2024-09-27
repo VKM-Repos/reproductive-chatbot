@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-type Chat = any[];
+type Chat = [];
 interface ChatState {
   chats: Chat;
   storeChat: (chats: Chat) => void;
