@@ -9,7 +9,6 @@ import useChatStream, {
 
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 // import useChatStore from "@/app/store/chat.store";
-import { Button } from "../ui/button";
 import ChatForm from "./ChatForm";
 
 export default function ChatCard({

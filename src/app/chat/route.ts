@@ -3,19 +3,19 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const prompt = searchParams.get("prompt");
-  // const question = {
-  //   question: prompt,
-  // };
+  const question = {
+    question: prompt,
+  };
   const apiResponse = await fetch(
-    // "https://api.dev.vhdo.org/api/ai/health-query",
-    "https://jsonplaceholder.typicode.com/posts",
+    "https://api.dev.vhdo.org/api/ai/health-query",
+    // "https://jsonplaceholder.typicode.com/posts",
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify(question),
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify(question),
+      // body: JSON.stringify({ prompt }),
     }
   );
 
@@ -32,7 +32,7 @@ export async function GET(request: Request) {
     new ReadableStream({
       async start(controller) {
         let index = 0;
-        const textToStream = `${JSON.stringify(apiData.prompt)}`;
+        const textToStream = `${JSON.stringify(apiData.answer)}`;
 
         const timer = setInterval(() => {
           if (index < textToStream.length) {
