@@ -7,13 +7,15 @@ export async function GET(request: Request) {
     question: prompt,
   };
   const apiResponse = await fetch(
-    "https://api.dev.vhdo.org/api/ai/health-query",
+    // "https://api.dev.vhdo.org/api/ai/health-query",
+    "https://jsonplaceholder.typicode.com/posts",
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(question),
+      // body: JSON.stringify(question),
+      body: JSON.stringify({ prompt }),
     }
   );
 
@@ -25,12 +27,13 @@ export async function GET(request: Request) {
   }
 
   const apiData = await apiResponse.json();
+  console.log(request, ";;;;;;");
 
   const response = new NextResponse(
     new ReadableStream({
       async start(controller) {
         let index = 0;
-        const textToStream = `${JSON.stringify(apiData.answer)}`;
+        const textToStream = `${JSON.stringify(apiData.prompt)}`;
 
         const timer = setInterval(() => {
           if (index < textToStream.length) {

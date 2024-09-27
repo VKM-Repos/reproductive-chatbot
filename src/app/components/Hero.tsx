@@ -7,12 +7,13 @@ export default function Hero() {
       <div className="w-full h-fit">
         <div className=" flex flex-col items-center gap-10 w-[550px]">
           <h2 className="font-montserrat font-semibold text-5xl leading-[60px]">
-            Understanding Reproductive Health for All
+            Understanding Reproductive Health
+            <br /> & Nutrition for All
           </h2>
           <p className="font-poppins text-sm">
-            Empowering individuals through knowledge on reproductive health,
-            with access to the latest research and insights into well-being,
-            fertility, family planning, and sexual health.
+            Empowering individuals through knowledge on reproductive health and
+            nutrition, with access to the latest research and insights into
+            well-being, fertility, family planning, and sexual health.
           </p>
         </div>
         <div className="font-poppins flex gap-10 mt-20">

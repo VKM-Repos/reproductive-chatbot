@@ -1,4 +1,5 @@
 "use client";
+import "dotenv/config";
 import { motion } from "framer-motion";
 import SparkIcon from "./SparkIcon";
 import { useEffect, useRef, useState } from "react";
@@ -36,7 +37,7 @@ export default function ChatCard({
     isStreaming,
   } = useChatStream({
     options: {
-      url: "http://localhost:3000/chat",
+      url: `${location.origin}/chat`,
       method: "GET",
     },
     method: {
@@ -78,6 +79,7 @@ export default function ChatCard({
       handleSubmit();
     }
   };
+  console.log(location.origin);
 
   return (
     <motion.div
@@ -85,7 +87,7 @@ export default function ChatCard({
       initial={{ x: 0 }}
       animate={{ x: -20 }}
     >
-      <div className="fixed top-0 right-0  py-6 px-2 border-0 border-l border-[#FF765A] w-full bg-white  h-full">
+      <div className="fixed top-0 right-0  py-6 px-2 shadow-2xl w-full bg-white  h-full">
         <div className="flex justify-end pb-4 px-5">
           <button onClick={handleSetShowChat}>
             <svg
@@ -114,7 +116,7 @@ export default function ChatCard({
           </div>
         )}
         {!startChat && (
-          <div className="text-[10px] flex justify-center gap-1 flex-wrap">
+          <div className="text-[12px] flex justify-center gap-1 flex-wrap">
             {initialQuestions?.map((question) => (
               <button
                 onClick={() => {
@@ -394,7 +396,7 @@ export default function ChatCard({
               <textarea
                 name=""
                 id=""
-                placeholder="Ask me Anything..."
+                placeholder="Ask me Anything about Reproductive Health & Nutrition"
                 className="h-full focus:outline-none no-scrollbar text-sm"
                 rows={3}
                 onChange={handleInputChange}
