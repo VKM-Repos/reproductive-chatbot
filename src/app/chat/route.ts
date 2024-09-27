@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const prompt = searchParams.get("prompt");
-  const question = {
-    question: prompt,
-  };
+  // const question = {
+  //   question: prompt,
+  // };
   const apiResponse = await fetch(
     // "https://api.dev.vhdo.org/api/ai/health-query",
     "https://jsonplaceholder.typicode.com/posts",
@@ -27,7 +27,6 @@ export async function GET(request: Request) {
   }
 
   const apiData = await apiResponse.json();
-  console.log(request, ";;;;;;");
 
   const response = new NextResponse(
     new ReadableStream({
