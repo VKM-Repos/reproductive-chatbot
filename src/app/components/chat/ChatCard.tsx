@@ -299,9 +299,7 @@ export default function ChatCard({
                               </svg>
                             </PopoverTrigger>
                             <PopoverContent side="top" className="z-[3000]">
-                              <p className="text-xs w-fit text-green-600">
-                                Edit
-                              </p>
+                              <p className="text-xs w-fit ">Edit</p>
                             </PopoverContent>
                           </Popover>
                         </div>
@@ -334,9 +332,7 @@ export default function ChatCard({
                               </svg>
                             </PopoverTrigger>
                             <PopoverContent side="top" className="z-[3000]">
-                              <p className="text-xs w-fit text-green-600">
-                                copied
-                              </p>
+                              <p className="text-xs w-fit ">copied</p>
                             </PopoverContent>
                           </Popover>
                         </div>
@@ -369,9 +365,7 @@ export default function ChatCard({
                             </svg>
                           </PopoverTrigger>
                           <PopoverContent side="top" className="z-[3000]">
-                            <p className="text-xs w-fit text-green-600">
-                              copied
-                            </p>
+                            <p className="text-xs w-fit ">copied</p>
                           </PopoverContent>
                         </Popover>
                       </div>
