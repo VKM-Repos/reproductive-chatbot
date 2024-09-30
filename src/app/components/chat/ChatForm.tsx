@@ -1,4 +1,10 @@
-import { ChangeEvent, useEffect, useRef } from "react";
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from "react";
 import { Button } from "../ui/button";
 
 export default function ChatForm({
@@ -6,6 +12,7 @@ export default function ChatForm({
   handleSubmit,
   input,
   isStreaming,
+  setStartChat,
   startChat,
 }: {
   handleInputChange: (
@@ -14,6 +21,7 @@ export default function ChatForm({
   handleSubmit: () => void;
   input: string;
   isStreaming: boolean;
+  setStartChat: Dispatch<SetStateAction<boolean>>;
   startChat: boolean;
 }) {
   const myFormRef = useRef<HTMLFormElement>(null);
@@ -21,6 +29,7 @@ export default function ChatForm({
     if (e.key == "Enter" && e.shiftKey == false) {
       e.preventDefault();
       handleSubmit();
+      // setStartChat(true);
     }
   };
   useEffect(() => {
@@ -33,7 +42,11 @@ export default function ChatForm({
       <form
         ref={myFormRef}
         className="border rounded-lg w-full h-full flex justify-between px-4 py-1 bg-white"
-        onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+          setStartChat(true);
+        }}
       >
         <div className="flex flex-col justify-start w-full h-full">
           <textarea

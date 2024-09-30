@@ -27,12 +27,12 @@ export async function GET(request: Request) {
   }
 
   const apiData = await apiResponse.json();
-
+  const formattedText = apiData.answer.replace(/\n/g, "<br />");
   const response = new NextResponse(
     new ReadableStream({
       async start(controller) {
         let index = 0;
-        const textToStream = `${JSON.stringify(apiData.answer)}`;
+        const textToStream = `${JSON.stringify(formattedText)}`;
 
         const timer = setInterval(() => {
           if (index < textToStream.length) {
